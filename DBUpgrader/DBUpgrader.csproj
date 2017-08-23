@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DbUp, Version=3.3.5.0, Culture=neutral, PublicKeyToken=4b419c53bdfd4cbf, processorArchitecture=MSIL">
-      <HintPath>..\packages\dbup.3.3.5\lib\net35\DbUp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,6 +51,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\Script00001-CreateTableIdeas.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DbUp\dbup-core\dbup-core.csproj">
+      <Project>{c98de7c6-af51-4901-904d-75fccb17ee31}</Project>
+      <Name>dbup-core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DbUp\dbup-sqlserver\dbup-sqlserver.csproj">
+      <Project>{8190b40b-ac5b-414f-8a00-9b6a2c12b010}</Project>
+      <Name>dbup-sqlserver</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

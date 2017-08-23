@@ -77,11 +77,11 @@ IF !ERRORLEVEL! NEQ 0 goto error
 :: 2.1 Build Mr. DbUpgrader
 
 echo Upgrading the database
-call :ExecuteCmd dotnet build "%DEPLOYMENT_SOURCE%\DBUpgraderCore\DBUpgraderCore.csproj"
+call "%MSBUILD_PATH" "%DEPLOYMENT_SOURCE%\DBUpgrader\DBUpgrader.csproj"
 IF !ERRORLEVEL! NEQ 0 goto error
 
-echo RUNNING THE ACTUAL DBUpgraderCore
-call :ExecuteCmd dotnet "%DEPLOYMENT_SOURCE%\DBUpgraderCore\bin\Debug\netcoreapp2.0\DBUpgraderCore.dll" %MSSQL_CONNECTION%
+echo RUNNING THE ACTUAL DBUpgrader
+call "%DEPLOYMENT_SOURCE%\DBUpgrader\bin\Debug\DBUpgrader.exe" %MSSQL_CONNECTION%
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 3. KuduSync
