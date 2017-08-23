@@ -81,7 +81,7 @@ call :ExecuteCmd dotnet build "%DEPLOYMENT_SOURCE%\DBUpgraderCore\DBUpgraderCore
 IF !ERRORLEVEL! NEQ 0 goto error
 
 echo RUNNING THE ACTUAL DBUpgraderCore
-call "%DEPLOYMENT_SOURCE%\DBUpgraderCore\bin\debug\DBUpgraderCore.exe" %MSSQL_CONNECTION%
+call :ExecuteCmd "%DEPLOYMENT_SOURCE%\DBUpgraderCore\bin\debug\DBUpgraderCore.exe" %MSSQL_CONNECTION%
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 3. KuduSync
