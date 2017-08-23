@@ -78,7 +78,7 @@ IF !ERRORLEVEL! NEQ 0 goto error
 echo is this your deployement sql string ?
 REM echo %MSSQL_CONNECTION%
 echo Upgrading the database
-call :ExecuteCmd %MSBUILD_PATH% DBUpgrader\DbUpgrader.csproj
+call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\DBUpgrader\DbUpgrader.csproj"
 IF !ERRORLEVEL! NEQ 0 goto error
 
 REM echo RUNNING THE ACTUAL DBUpgrader
