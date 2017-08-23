@@ -13,9 +13,13 @@ namespace DBUpgrader
 	{
 		static int Main(string[] args)
 		{
+			//var connectionString =
+			//	args.FirstOrDefault()
+			//	?? @"Server=DESKTOP-JOFGSH2;Database=IdeaDB;Trusted_Connection=True;";
+
 			var connectionString =
 				args.FirstOrDefault()
-				?? @"Server=DESKTOP-JOFGSH2;Database=IdeaDB;Trusted_Connection=True;";
+				?? @"Server=tcp:idea-addin.database.windows.net,1433;Initial Catalog=idea-sql;Persist Security Info=False;User ID=sabeersulaiman;Password=Db#128$AbEeR;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
 			EnsureDatabase.For.SqlDatabase(connectionString);
 

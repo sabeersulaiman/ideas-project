@@ -9,9 +9,4 @@
     <EmbeddedResource Include="Scripts\Script00001-CreateTableIdeas.sql" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DbUp\dbup-core\dbup-core.csproj" />
-    <ProjectReference Include="..\DbUp\dbup-sqlserver\dbup-sqlserver.csproj" />
-  </ItemGroup>
-
 </Project>

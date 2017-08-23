@@ -76,13 +76,13 @@ IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 2.1 Build Mr. DbUpgrader
 
-echo Upgrading the database
-call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\DBUpgrader\DBUpgrader.csproj"
-IF !ERRORLEVEL! NEQ 0 goto error
+REM echo Upgrading the database
+REM call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\DBUpgrader\DBUpgrader.csproj"
+REM IF !ERRORLEVEL! NEQ 0 goto error
 
-echo RUNNING THE ACTUAL DBUpgrader
-call "%DEPLOYMENT_SOURCE%\DBUpgrader\bin\Debug\DBUpgrader.exe" %MSSQL_CONNECTION%
-IF !ERRORLEVEL! NEQ 0 goto error
+REM echo RUNNING THE ACTUAL DBUpgrader
+REM call "%DEPLOYMENT_SOURCE%\DBUpgrader\bin\Debug\DBUpgrader.exe" %MSSQL_CONNECTION%
+REM IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 3. KuduSync
 call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
