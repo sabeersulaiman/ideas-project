@@ -74,7 +74,7 @@ namespace MasjidPro.Models
 				{
 					commandString = @"
 					INSERT INTO ideas(ideaHeading, ideaBody, likes, dislikes, ideaStatus, addedBy, dateAdded) output INSERTED.ideaId
-					VALUES(@ideaHeading, @ideaBody, @likes, @dislikes, @status, @addedBy, @dateAdded);";
+					VALUES(@ideaHeading, @ideaBody, @likes, @dislikes, @ideaStatus, @addedBy, @dateAdded);";
 				}
 				else
 				{
@@ -132,24 +132,75 @@ namespace MasjidPro.Models
 				
 				if (reader.Read() == true)
 				{
-					var idea = new Idea(
-						reader.GetInt32(reader.GetOrdinal("ideaId")),
-						reader.GetString(reader.GetOrdinal("ideaHeading")),
-						reader.GetString(reader.GetOrdinal("ideaBody")),
-						reader.GetInt32(reader.GetOrdinal("likes")),
-						reader.GetInt32(reader.GetOrdinal("dislikes")),
-						reader.GetInt32(reader.GetOrdinal("ideaStatus")),
-						(DateTime)reader.GetSqlDateTime(reader.GetOrdinal("dateAdded")),
-						(Boolean)reader["rowDeleted"],
-						(string)reader["addedBy"]
-					);
-
+					var idea = Idea.getIdeaFromReader(reader);
 					return idea;
 				}
 				else return null;
 			}
 		}
 
+		public static async Task<List<Idea>> getList(int page)
+		{
+			var commandString = @"listIdeas";
+			using (var db = new SQLDisposible())
+			{
+				var command = new SqlCommand(commandString, db.Connection);
+				command.CommandType = System.Data.CommandType.StoredProcedure;
+				command.Parameters.Add(new SqlParameter("@pageNumber", page));
 
-    }
+				db.Connection.Open();
+				var reader = await command.ExecuteReaderAsync();
+
+				var ideas = new List<Idea>();
+
+				while(reader.Read() == true)
+				{
+					ideas.Add(Idea.getIdeaFromReader(reader));
+				}
+
+				return ideas;
+			}
+		}
+
+		public static Idea getIdeaFromReader(SqlDataReader reader)
+		{
+			var idea = new Idea(
+				reader.GetInt32(reader.GetOrdinal("ideaId")),
+				reader.GetString(reader.GetOrdinal("ideaHeading")),
+				reader.GetString(reader.GetOrdinal("ideaBody")),
+				reader.GetInt32(reader.GetOrdinal("likes")),
+				reader.GetInt32(reader.GetOrdinal("dislikes")),
+				reader.GetInt32(reader.GetOrdinal("ideaStatus")),
+				(DateTime)reader.GetSqlDateTime(reader.GetOrdinal("dateAdded")),
+				(Boolean)reader["rowDeleted"],
+				(string)reader["addedBy"]
+			);
+
+			return idea;
+		}
+
+		public static async Task<List<Idea>> getSearchList(string search, int page)
+		{
+			var commandString = @"searchIdeas";
+			using (var db = new SQLDisposible())
+			{
+				var command = new SqlCommand(commandString, db.Connection);
+				command.CommandType = System.Data.CommandType.StoredProcedure;
+				command.Parameters.Add(new SqlParameter("@pageNumber", page));
+				command.Parameters.Add(new SqlParameter("@search", search));
+
+				db.Connection.Open();
+				var reader = await command.ExecuteReaderAsync();
+
+				var ideas = new List<Idea>();
+
+				while (reader.Read() == true)
+				{
+					ideas.Add(Idea.getIdeaFromReader(reader));
+				}
+
+				return ideas;
+			}
+		}
+	}
 }

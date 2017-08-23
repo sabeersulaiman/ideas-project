@@ -28,7 +28,7 @@ CREATE PROCEDURE listIdeas
 AS
     SELECT *
     FROM ideas
-	ORDER BY dateAdded ASC
+	ORDER BY dateAdded DESC
 	OFFSET (@pageNumber * 10) ROWS
     FETCH NEXT 10 ROWS ONLY
 GO
@@ -40,7 +40,7 @@ AS
 	SELECT *
 	FROM ideas
 	WHERE FREETEXT (ideaHeading, @search) OR FREETEXT (ideaBody, @search)
-	ORDER BY dateAdded ASC
+	ORDER BY dateAdded DESC
 	OFFSET (@pageNumber * 10) ROWS
 	FETCH NEXT 10 ROWS ONLY
 GO

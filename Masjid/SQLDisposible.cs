@@ -13,7 +13,7 @@ namespace MasjidPro
 		public SQLDisposible()
 		{
 			//string envvariable = Environment.GetEnvironmentVariable("SQLCONNSTR_localdb");
-			string envvariable = @"Server = (localdb)\mssqllocaldb; Database = IdeaDB; Trusted_Connection = True;";
+			string envvariable = @"Server = DESKTOP-JOFGSH2; Database = IdeaDB; Trusted_Connection = True;";
 #if DEBUG
 			Connection = new SqlConnection(envvariable);
 			Console.WriteLine("Debug Key Taken");

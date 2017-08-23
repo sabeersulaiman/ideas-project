@@ -120,5 +120,38 @@ namespace MasjidPro.Controllers
 				return new ObjectResult(response);
 			}
 		}
+
+		[HttpGet("list/{page}")]
+		public async Task<IActionResult> ListIdeas(int page)
+		{
+			try
+			{
+				var ideas = await Idea.getList(page);
+				var response = new ResponseModel<List<Idea>>("IE100", "Success", ideas);
+				return new ObjectResult(response);
+			}
+			catch(Exception e)
+			{
+				var response = new ResponseModel<List<Idea>>("IE200", "Failed.", null);
+				return new ObjectResult(response);
+			}
+		}
+
+
+		[HttpGet("search/{search}/{page}")]
+		public async Task<IActionResult> ListIdeas(string search, int page)
+		{
+			try
+			{
+				var ideas = await Idea.getSearchList(search, page);
+				var response = new ResponseModel<List<Idea>>("IE100", "Success", ideas);
+				return new ObjectResult(response);
+			}
+			catch (Exception e)
+			{
+				var response = new ResponseModel<List<Idea>>("IE200", "Failed.", null);
+				return new ObjectResult(response);
+			}
+		}
 	}
 }
