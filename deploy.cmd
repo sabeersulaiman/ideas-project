@@ -75,16 +75,14 @@ call :ExecuteCmd dotnet publish "%DEPLOYMENT_SOURCE%\Masjid\MasjidPro.csproj" --
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 2.1 Build Mr. DbUpgrader
-call :ExecuteCmd dotnet restore "%DEPLOYMENT_SOURCE%\DBUpgraderCore\DBUpgraderCore.csproj"
-IF !ERRORLEVEL! NEQ 0 goto error
 
 echo Upgrading the database
-call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\DBUpgraderCore\DBUpgraderCore.csproj"
+call :ExecuteCmd dotnet build "%DEPLOYMENT_SOURCE%\DBUpgraderCore\DBUpgraderCore.csproj"
 IF !ERRORLEVEL! NEQ 0 goto error
 
-REM echo RUNNING THE ACTUAL DBUpgraderCore
-REM call %DEPLOYMENT_SOURCE%\DBUpgraderCore\bin\debug\DBUpgraderCore.exe %MSSQL_CONNECTION%
-REM IF !ERRORLEVEL! NEQ 0 goto error
+echo RUNNING THE ACTUAL DBUpgraderCore
+call %DEPLOYMENT_SOURCE%\DBUpgraderCore\bin\debug\DBUpgraderCore.exe %MSSQL_CONNECTION%
+IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 3. KuduSync
 call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
