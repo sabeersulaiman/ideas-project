@@ -9,6 +9,7 @@ namespace DBUpgraderCore
     {
 		static int Main(string[] args)
 		{
+			Console.WriteLine("I am starting..." + args.FirstOrDefault());
 			var connectionString =
 				args.FirstOrDefault()
 				?? @"Server=DESKTOP-JOFGSH2;Database=IdeaDB;Trusted_Connection=True;";
