@@ -15,7 +15,7 @@ namespace DBUpgrader
 		{
 			var connectionString =
 				args.FirstOrDefault()
-				?? @"Server=(localdb)\mssqllocaldb;Database=IdeaDB;Trusted_Connection=True;";
+				?? @"Server=DESKTOP-JOFGSH2;Database=IdeaDB;Trusted_Connection=True;";
 
 			EnsureDatabase.For.SqlDatabase(connectionString);
 
