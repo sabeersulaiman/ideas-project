@@ -77,7 +77,7 @@ IF !ERRORLEVEL! NEQ 0 goto error
 :: 2.1 Build Mr. DbUpgrader
 
 echo Upgrading the database
-call "%MSBUILD_PATH" "%DEPLOYMENT_SOURCE%\DBUpgrader\DBUpgrader.csproj"
+%MSBUILD_PATH "%DEPLOYMENT_SOURCE%\DBUpgrader\DBUpgrader.csproj"
 IF !ERRORLEVEL! NEQ 0 goto error
 
 echo RUNNING THE ACTUAL DBUpgrader
