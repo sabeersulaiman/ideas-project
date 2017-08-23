@@ -77,6 +77,13 @@ IF !ERRORLEVEL! NEQ 0 goto error
 :: 2.1 Build Mr. DbUpgrader
 echo is this your deployement sql string ?
 echo %MSSQL_CONNECTION%
+echo Upgrading the database
+%MSBUILD_PATH% DBUpgrader\DbUpgrader.csproj
+IF !ERRORLEVEL! NEQ 0 goto error
+
+echo RUNNING THE ACTUAL DBUpgrader
+call %DEPLOYMENT_SOURCE%\DBUpgrader\bin\debug\DBUpgrader.exe %MSSQL_CONNECTION%
+IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 3. KuduSync
 call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
