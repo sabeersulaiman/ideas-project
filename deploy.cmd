@@ -75,8 +75,9 @@ call :ExecuteCmd dotnet publish "%DEPLOYMENT_SOURCE%\Masjid\MasjidPro.csproj" --
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 2.1 Build Mr. DbUpgrader
-echo is this your deployement sql string ?
-REM echo %MSSQL_CONNECTION%
+call :ExecuteCmd dotnet restore "%DEPLOYMENT_SOURCE%\DBUpgrader\DbUpgrader.csproj"
+IF !ERRORLEVEL! NEQ 0 goto error
+
 echo Upgrading the database
 call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\DBUpgrader\DbUpgrader.csproj"
 IF !ERRORLEVEL! NEQ 0 goto error
