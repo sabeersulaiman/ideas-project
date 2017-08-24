@@ -1,5 +1,5 @@
 let Config = {
-  appBase: 'http://localhost:5000/'
+  appBase: 'https://idea-addin.azurewebsites.net/'
 }
 
 export { Config };

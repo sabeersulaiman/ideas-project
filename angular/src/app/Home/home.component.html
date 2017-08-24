@@ -1,4 +1,45 @@
-<h2>These are some masjids...</h2>
-<ul class="cat_ul">
-  <li *ngFor="let masjid of masjids">{{masjid.name}}</li>
-</ul>
+<nav class="navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">Ideas @ Ad - Din</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="container-fluid main-head">
+  <div class="center-head">
+    <div class="row">
+      <div *ngFor="let idea of ideas;" class="idea col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="idea-box">
+          <div class="actions">
+            <div class="action-item">
+              <img src="../../assets/like.png" />
+              <span>{{idea.likes}}</span>
+            </div>
+            <div class="action-item">
+              <img src="../../assets/dislike.png" />
+              <span>{{idea.dislikes}}</span>
+            </div>
+          </div>
+          <div class="explain">
+            <h2>{{idea.ideaHeading}}</h2>
+            <p class="idea-body">{{idea.ideaBody}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

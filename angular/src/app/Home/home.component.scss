@@ -1,0 +1,44 @@
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.idea {
+  height: 312px;
+}
+
+.idea-box {
+  // background: #dedede;
+  padding: 2px;
+  display: flex;
+}
+
+.actions{
+  width: 50px;
+  .action-item{
+    padding: 5px;
+    img{
+      width: 40px;
+    }
+    span{
+      display: block;
+      text-align: center;
+      width: 40px;
+    }
+  }
+}
+
+.explain{
+  h2{
+    font-size: 1.2em;
+    font-weight: 700;
+    margin: 4px;
+  }
+  p{
+    font-size: .8em;
+  }
+}
+
+.icon-bar{
+  color: green !important;
+}
